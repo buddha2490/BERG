@@ -26,7 +26,7 @@ Character vector for the variable for which you need frequencies
 }
 }
 
-}
+
 \value{
 Data frame including the raw frequencies and proportions, and a age-standardized proportion.
 }

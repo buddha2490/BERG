@@ -5,7 +5,8 @@
 Age-standardized frequencies
 }
 \description{
-This function calculates age-standardized cross-tab frequencies for two variables}
+This function calculates age-standardized cross-tab frequencies for two variables
+}
 \usage{
 ageStdCrossTab(dat,mar=2,agedist,age,var,strata)
 }
@@ -31,7 +32,7 @@ Character vector for the strata variable for which you need frequencies (typical
 }
 }
 
-}
+
 \value{
 Data frame including the only the age-adjusted row/column percents
 }

@@ -36,7 +36,7 @@ Brian Carter
 
 
 \seealso{
-\code{\link{metafor::rma}}, ~~~
+\code{\link{rma}}, ~~~
 }
 \examples{
 

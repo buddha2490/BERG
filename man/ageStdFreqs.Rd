@@ -62,3 +62,4 @@ manytables <- lapply(c("bmicat","smoking"),function(x){
 final.frequencies <- Reduce(function(x,y) rbind(x,y), manytables)
 
 
+}

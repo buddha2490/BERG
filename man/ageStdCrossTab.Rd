@@ -57,5 +57,5 @@ mytable <- ageStdCrossTab(dat=example.data,
                          strata="smoking")
 
 
-
+}
 

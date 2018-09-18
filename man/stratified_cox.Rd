@@ -87,4 +87,4 @@ foo <- stratified_cox(dat=example.data,
                       age="age_int",
                       covariates=NULL)
 
-
+}

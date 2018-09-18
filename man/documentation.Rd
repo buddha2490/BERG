@@ -27,5 +27,5 @@ Brian Carter and James Hodge
 mydata1 <- data.frame(x=1:5,y=x^2)
 mydata2 <- data.frame(a=letters[1:10],b=rnorm(10,5))
 document(mydata1,mydata2)
-
+}
 

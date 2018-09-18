@@ -66,7 +66,7 @@ Brian Carter
 }
 
 \seealso{
-\code{\link{coxph}}, {\link{cox_models}}, {\link{stratified_models}}
+\code{\link{coxph}}, {\link{cox_models}}, {\link{stratified_cox}}
 }
 
 

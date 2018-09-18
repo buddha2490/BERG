@@ -55,6 +55,7 @@ expo.levels <- levels(df[[expoVar]]) # its ok if this is NULL for continuous var
 # So they will be easier to review
 
 categorical <- function(){
+require(survival,quietly=T)
 
 # Create an interaction variable for calculating case numbers
 # This interaction() categories will match the stratified output format, so I can cbind() later

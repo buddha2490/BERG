@@ -78,6 +78,7 @@ expo.levels <- levels(df[[expoVar]]) # if continuous, will be NULL, that's ok
 # These functions will do the work and produce an organized table, complete with case numbers
 
 continuous <- function(){
+require(survival,quietly=T)
 
 # I need to cbind() by the strataVar levels
 # Adding the levels into the dataset so I can sort them out

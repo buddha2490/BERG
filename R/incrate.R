@@ -53,7 +53,7 @@ agelist2 <- lapply(names(agelist),function(x){
                       stringsAsFactors=F)
 })
 weight <- Reduce(function(x,y) rbind(x,y),agelist2)
-rm(obs,agelist,agelist2,weightlist,i)
+rm(obs,agelist,agelist2,i)
 } else {
      agegrps <- seq(40,85,5)
 }

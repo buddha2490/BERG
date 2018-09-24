@@ -8,7 +8,7 @@ Description: A handful of functions for automating modeling, frequency tables, m
     documentation.
 License: None
 Encoding: UTF-8
-LazyData: FALSE
+LazyData: true
 Imports:
     metafor,
     dplyr,

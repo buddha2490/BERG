@@ -12,7 +12,8 @@ incrate <- function(dat=df, agedist, agegrps=NULL, dtint, birthday,
                     failtime, outcome, expo){
 newdf <- dat
 
-load("data/nutweightlist.rdata")
+
+
 #data("nutweightlist")
 weight <- weightlist[[agedist]]
 

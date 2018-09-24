@@ -14,7 +14,7 @@ newdf <- dat
 
 
 
-#data("nutweightlist")
+data(weightlist)
 weight <- weightlist[[agedist]]
 
 # Age categories must be chosen.  Default is 40-44, 45-49, 50-54, etc.

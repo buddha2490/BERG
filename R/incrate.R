@@ -12,7 +12,8 @@ incrate <- function(dat=df, agedist, agegrps=NULL, dtint, birthday,
                     failtime, outcome, expo){
 newdf <- dat
 
-load("data/nutweightlist.rdata")
+#load("data/nutweightlist.rdata")
+data(nutweightlist)
 weight <- weightlist[[agedist]]
 
 # Age categories must be chosen.  Default is 40-44, 45-49, 50-54, etc.

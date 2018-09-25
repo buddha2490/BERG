@@ -1,5 +1,5 @@
-\name{nutweightlist}
-\alias{nutweightlist}
+\name{weightlist}
+\alias{weightlist}
 \docType{data}
 \title{
 Age-specific weights used for rate analyses and age-adjusted frequencies
@@ -7,7 +7,7 @@ Age-specific weights used for rate analyses and age-adjusted frequencies
 \description{
 This dataset contains age-specific weights that are required for running time-dependent rate analyses in the Nutrition Cohort.  Also required for running age-adjusted frequency tables.
 }
-\usage{data("nutweightlist")}
+\usage{weightlist[[x]])}
 \format{
   A list with 59 data.frames.
   \describe{
@@ -77,9 +77,9 @@ This dataset contains age-specific weights that are required for running time-de
   }
 }
 \details{
-Each dataset in nutweightlist corresponds to a person year or age distribution.  In rate analyses, the user must choose one of these age distributions to calculate the adjustment.  See documentation for rate and age-adjustments for details how to use these datasets in each function.
+Each dataset in weightlist corresponds to a person year or age distribution.  In rate analyses, the user must choose one of these age distributions to calculate the adjustment.  See documentation for rate and age-adjustments for details how to use these datasets in each function.
 }
 
 \examples{
-data(nutweightlist)
+weightlist[["YEARS00"]]
 }

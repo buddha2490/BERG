@@ -1,7 +1,7 @@
 Package: BERG
 Type: Package
 Title: Set of standardized functions for running analyses in the American Cancer Society's Behavioral and Epidemiological Research Group
-Version: 0.1.0
+Version: 1.0.0
 Author: Brian Carter
 Maintainer: Brian Carter <brian.carter@cancer.org>
 Description: A handful of functions for automating modeling, frequency tables, metaanalyses, rate analyses, and

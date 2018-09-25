@@ -55,7 +55,7 @@ Brian Carter
 
 
 \seealso{
- \code{\link{nutweightlist}}
+ \code{\link{weightlist}}
 }
 
 \examples{

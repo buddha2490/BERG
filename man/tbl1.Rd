@@ -42,7 +42,9 @@ test1 <- data.frame(strata.variable=sample(0:1,100,replace=T),
 		       categorical2 = sample(1:3,100,replace=T)
 		      )
 
-table1 <- tbl1(dat=test1, variable=c("continuous1","continuous2","categorical1","categorical2"), stratvar="strata.variable")
+table1 <- tbl1(dat=test1,
+          variable=c("continuous1","continuous2","categorical1","categorical2"),
+          stratvar="strata.variable")
 
 }
 

@@ -4,8 +4,13 @@
 # Stratified interaction models -------------------------------------------
 
 stratified_cox <- function(dat,failtime,outcome,expoVar,strataVar,age,covariates=NULL){
-require(survival)
-require(dplyr)
+
+# load packages if neceessary
+packages <- (.packages())
+if (!"dplyr" %in% packages) require(dplyr,quietly=T)
+if (!"survival" %in% packages) require(survival,quietly=T)
+
+
 # data file
 df <- dat
 
@@ -55,7 +60,6 @@ expo.levels <- levels(df[[expoVar]]) # its ok if this is NULL for continuous var
 # So they will be easier to review
 
 categorical <- function(){
-require(survival,quietly=T)
 
 # Create an interaction variable for calculating case numbers
 # This interaction() categories will match the stratified output format, so I can cbind() later

@@ -10,7 +10,13 @@
 
 incrate <- function(dat=df, agedist, agegrps=NULL, dtint, birthday,
                     failtime, outcome, expo){
-newdf <- dat
+# load packages if neceessary
+packages <- (.packages())
+if (!"survival" %in% packages) require(survival,quietly=T)
+if (!"dplyr" %in% packages) require(dplyr,quietly=T)
+
+
+     newdf <- dat
 
 
 weight <- weightlist[[agedist]]

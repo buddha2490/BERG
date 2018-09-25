@@ -12,4 +12,7 @@ LazyData: true
 Imports:
     metafor,
     dplyr,
-    survival
+    survival,
+    rms,
+    xlsx,
+    officer

@@ -3,8 +3,7 @@ ageStdCrossTab <- function(dat,mar=2,agedist,age,var,strata){
   df <- dat
 
   # get weights
-  #load("//access.cancer.org/ACSDEPT/OCMO/Intramural Research/Epidemiology Research/Staff/Brian Carter/Functions/NUTSTANDARD weights.Rdata")
-  load("data/nutweightlist.Rdata")
+
   weights <- weightlist[[agedist]]
   sum <- sum(weights$weights)
   weights$weights <- weights$weights/sum

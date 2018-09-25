@@ -4,7 +4,6 @@ ageStdFreqs <- function(dat,agedist,age,var){
   df <- dat
 
   # get weights
-  load("data/nutweightlist.Rdata")
   weights <- weightlist[[agedist]]
   sum <- sum(weights$weights)
   weights$weights <- weights$weights/sum

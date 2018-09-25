@@ -3,7 +3,13 @@
 
 
 interaction_cox <- function(dat,failtime,outcome,expoVar,strataVar,age,covariates=NULL){
-require(survival,quietly=T)
+
+# load packages if neceessary
+packages <- (.packages())
+if (!"survival" %in% packages) require(survival,quietly=T)
+if (!"dplyr" %in% packages) require(dplyr,quietly=T)
+
+
 
 # data file
 df <- dat

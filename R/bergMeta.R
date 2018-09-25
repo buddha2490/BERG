@@ -1,6 +1,10 @@
 bergMeta <- function(dat,method="DL"){
 
-     
+
+packages <- (.packages())
+if (!"metafor" %in% packages) require(metafor,quietly=T)
+
+
 df <- dat
 df <- df[!is.na(df$RR),]
 names.data <- names(df)

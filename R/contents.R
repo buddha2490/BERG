@@ -1,8 +1,10 @@
 contents <- function(data, varnum = T, write = NULL, outfile = NULL, filename = NULL){
 
-  require(dplyr)
-  require(xlsx)
-  require(officer)
+packages <- (.packages())
+if (!"dplyr" %in% packages) require(dplyr,quietly=T)
+if (!"xlsx" %in% packages) require(xlsx,quietly=T)
+if (!"officer" %in% packages) require(officer,quietly=T)
+
 
   # If write option is indicated, check to make sure output file and filename are given
   if (!is.null(write)){

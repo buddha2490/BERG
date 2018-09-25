@@ -1,7 +1,12 @@
 
 
 cox_models <- function(dat,failtime,outcome,expo,dtint,birthday,covariates,agedist,agegrps){
-require(survival,quietly=T)
+
+packages <- (.packages())
+if (!"survival" %in% packages) require(survival,quietly=T)
+if (!"dplyr" %in% packages) require(dplyr,quietly=T)
+
+
      df <- dat
 
 # Calculate age at baseline based on dtint and birthday

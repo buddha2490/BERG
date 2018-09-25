@@ -27,6 +27,11 @@
 
 tbl1 <- function(dat,variable,stratvar,percents=2,freq.type=0){
 
+# load packages if neceessary
+packages <- (.packages())
+if (!"dplyr" %in% packages) require(dplyr,quietly=T)
+
+
 # Rename the dataframe
 df <- dat
 

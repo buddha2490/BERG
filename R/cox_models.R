@@ -1,6 +1,6 @@
 
 
-cox_models <- function(dat,failtime,outcome,expo,dtint,birthday,covariates,agedist,agegrps){
+cox_models <- function(dat,failtime,outcome,expo,dtint,birthday,covariates=NULL,agedist,agegrps=NULL){
 
 packages <- (.packages())
 if (!"survival" %in% packages) require(survival,quietly=T)

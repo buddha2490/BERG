@@ -4,7 +4,7 @@
 \title{Documents number of observations and variables for merging datasets
 }
 \description{
-The documentation() function replicates some of the output found in the SAS log.  When loading or merging datasets, calling document() on any number of data frames will return the number of observations and number of variables.  This can be compared to the final merged dataset to spot-check that no variables or observations were dropped.
+The documentation() function replicates some of the output found in the SAS log.  When loading or merging datasets, calling documentation() on any number of data frames will return the number of observations and number of variables.  This can be compared to the final merged dataset to spot-check that no variables or observations were dropped.
 }
 \usage{
 documentation(...)

@@ -8,7 +8,7 @@ Cox proportional hazards models and documentation
 This function runs age- and multivariable-adjusted cox proportional hazards models.  The final results are compiled into a single table and all documentation is organized and prepared for program review.  Age-standardized rates will also be calculated for the exposure. Additionl functions are available for interaction and stratified models.
 }
 \usage{
-cox_models(dat,failtime,outcome,expo,dtint,birthday,covariates,agedist,agegrps)
+cox_models(dat,failtime,outcome,expo,dtint,birthday,covariates=NULL,agedist,agegrps=NULL)
 }
 
 \arguments{

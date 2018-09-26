@@ -1,9 +1,4 @@
 
-dat <- cohort
-
-expoVar <- "bmicat92"
-strataVar <- "sex"
-age <- "age92m"
 
 # Stratified interaction models -------------------------------------------
 

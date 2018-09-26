@@ -1,6 +1,3 @@
-knots <- 5
-agestrat <- "age92m"
-
 
 splineFun <- function(dat,expo,covariates=NULL,reference=NULL,knots,
                       start,stop,outcome,agestrat,

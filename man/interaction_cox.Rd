@@ -8,7 +8,7 @@ Runs single referent group cox models using interaction variables.
 The interaction_cox() function runs single referent group interaction cox models.  The main interaction variable is coded using the interaction(var1, var2) function.
 }
 \usage{
-interaction_cox(dat,failtime,outcome,expoVar,strataVar,age,covariates=NULL)
+interaction_cox(dat,start,stop,outcome,expoVar,strataVar,age,covariates=NULL)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

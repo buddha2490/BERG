@@ -15,11 +15,14 @@ interaction_cox(dat,failtime,outcome,expoVar,strataVar,age,covariates=NULL)
   \item{dat}{
 data frame used in the analysis
 }
-  \item{failtime}{
-Failtime variable used in the analysis
+  \item{start}{
+     Character vector naming your start of followup time, can be numeric or date format.  Typically this is one of our DTINT variables.  For time dependent or late-entry models, this will be the name of your start time variable.
+}
+  \item{stop}{
+     Character vector naming your end of followup time, can be numeric or date format.  Typically this is one of our DATEFT or DATEDD variables.  For time dependent or late-entry models, this will be the name of your stop time variable.
 }
   \item{outcome}{
-Character vector for the outcome variable used in the analysis, must be coded as 0=control, 1=case
+Character vector for the censor variable used in the analysis, must be coded as 0=control, 1=case
 }
   \item{expoVar}{
 Character vector for our main exposure variable, may be categorical or numeric
@@ -36,15 +39,15 @@ Character vector of covariates.  Default is NULL (age-adjusted analysis only)
 }
 
 \details{
-The interaction_cox() function will run simple interaction models, format the results into a table, and return all model output in a list format that is suitable for program review.
+The interaction_cox() function will run simple interaction models, format the results into a table, and return all model output in a list format that is suitable for program review. The function will run standard, time-dependent, or late-entry models, depending on how the data are structured prior to running the function
 
 Interaction models are coded using the following formula:
 
-y <- formula(Surv(failtime,outcome)~ interaction(expoVar,strataVar) + covariates + strata(age))
+y <- formula(Surv(start,stop,outcome)~ interaction(expoVar,strataVar) + covariates + strata(age))
 
 To calculate a p-interaction, a reduced model is also calculated:
 
-y <- formula(Surv(failtime,outcome) strataVar + expoVar + covariates + strata(age))
+y <- formula(Surv(start,stop,outcome) strataVar + expoVar + covariates + strata(age))
 
 The p-interaction is then calculated:
 
@@ -77,10 +80,13 @@ example.data <- data.frame(failnew=sample(1:7000,10000,replace=T),
                                                  10000,replace=T)),
                            bmicat=factor(sample(c("18.5-24.9","25-29.9","30+"),
                            10000,replace=T)),
+                           dtint=rep(as.Date("1992-01-01"),10000),
                            age_int=round(sample(c(40:80),10000,replace=T)))
 
+example.data$dateft <- example.data$dtint + example.data$failnew
 foo <- interaction_cox(dat=example.data,
-                      failtime="failnew",
+                      start="dtint",
+                      stop="dateft",
                       outcome="allcauses",
                       expoVar="smoking",
                       strataVar="bmicat",

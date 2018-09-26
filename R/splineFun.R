@@ -1,6 +1,9 @@
+knots <- 5
+agestrat <- "age92m"
+
 
 splineFun <- function(dat,expo,covariates=NULL,reference=NULL,knots,
-                      failtime,outcome,agestrat,
+                      start,stop,outcome,agestrat,
                       expo.label=NULL,
                       outcome.text=NULL){
 
@@ -11,6 +14,13 @@ if (!"survival" %in% packages) require(survival,quietly=T)
 
      df <- dat
      df$EXPOSURE <- df[[expo]]
+
+     # convert start and stop times to numeric
+     df[,c(start,stop)] <- lapply(df[,c(start,stop)],as.numeric)
+
+     # start time mus != stop time - adjusting if that is true (similar to adding 1 to fail time)
+     df[[stop]] <- df[[stop]] + 1/365.25
+
      dd <<- datadist(df)
      options(datadist="dd")
      scaleFUN <- function(x) sprintf("%.1f",x)
@@ -26,7 +36,7 @@ if ( (!class(df[[outcome]]) %in% c("integer","numeric"))) stop("Outcome variable
 if (is.null(reference)) warning("Reference point will be computed as the median unless you specify a reference point")
 
 # modeling
-     y <- formula(paste0("Surv(",failtime,",",outcome,")~ ",paste0("rcs(EXPOSURE, ",knots,")"), "+",
+     y <- formula(paste0("Surv(",start,",",stop,",",outcome,")~ ",paste0("rcs(EXPOSURE, ",knots,")"), "+",
                          paste(c(paste("strat(",agestrat,")"),covariates),collapse="+")))
      fit <- cph(y,data=df,x=T,y=T)
      nonlin <- anova(fit)

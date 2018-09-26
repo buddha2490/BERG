@@ -2,7 +2,7 @@
 # Single reference group interaction models ------------------------------------------------------
 
 
-interaction_cox <- function(dat,failtime,outcome,expoVar,strataVar,age,covariates=NULL){
+interaction_cox <- function(dat,start,stop,outcome,expoVar,strataVar,age,covariates=NULL){
 
 # load packages if neceessary
 packages <- (.packages())
@@ -13,6 +13,13 @@ if (!"dplyr" %in% packages) require(dplyr,quietly=T)
 
 # data file
 df <- dat
+
+# convert start and stop times to numeric
+df[,c(start,stop)] <- lapply(df[,c(start,stop)],as.numeric)
+
+# start time mus != stop time - adjusting if that is true (similar to adding 1 to fail time)
+df[[stop]] <- df[[stop]] + 1/365.25
+
 
 # Data checks - stop the program with error if some things are not correct
 class.strataVar <- class(df[[strataVar]]) # must be factor
@@ -28,19 +35,19 @@ df$INTERACTION <- interaction(df[[expoVar]],df[[strataVar]])
 
 # Formula for the categorical model
 y <- formula(paste(
-     paste0("Surv(",failtime,",",outcome,")~",
+     paste0("Surv(",start,",",stop,",",outcome,")~",
             paste(c("INTERACTION",covariates,paste0("strata(",age,")")),collapse="+"))))
 
 } else {
 # Formula for the continuous model
 y <- formula(paste(
-     paste0("Surv(",failtime,",",outcome,")~",
+     paste0("Surv(",start,",",stop,",",outcome,")~",
             paste0(expoVar,"*",strataVar," + "),
             paste(c(covariates,paste0("strata(",age,")")),collapse="+"))))
 }
 # Formula for the base model for P-interaction - same for categorical or continuous expoVar - just additive
 z <- formula(paste(
-     paste0("Surv(",failtime,",",outcome,")~",
+     paste0("Surv(",start,",",stop,",",outcome,")~",
             strataVar, "+",expoVar,"+",
             paste(c(covariates,paste0("strata(",age,")")),collapse="+"))))
 

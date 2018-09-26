@@ -8,24 +8,24 @@ Cox proportional hazards models and documentation
 This function runs age- and multivariable-adjusted cox proportional hazards models.  The final results are compiled into a single table and all documentation is organized and prepared for program review.  Age-standardized rates will also be calculated for the exposure. Additionl functions are available for interaction and stratified models.
 }
 \usage{
-cox_models(dat,failtime,outcome,expo,dtint,birthday,covariates=NULL,agedist,agegrps=NULL)
+cox_models(dat,start,stop,outcome,expo,birthday,covariates=NULL,agedist,agegrps=NULL)
 }
 
 \arguments{
   \item{dat}{
      Data frame containing the data for the analysis
 }
-  \item{failtime}{
-     Failtime variable (numeric)
+  \item{start}{
+     Character vector naming your start of followup time, can be numeric or date format.  Typically this is one of our DTINT variables.  For time dependent or late-entry models, this will be the name of your start time variable.
+}
+  \item{stop}{
+     Character vector naming your end of followup time, can be numeric or date format.  Typically this is one of our DATEFT or DATEDD variables.  For time dependent or late-entry models, this will be the name of your stop time variable.
 }
   \item{outcome}{
-     Outcome variable name (numeric), formatted 0=control, 1=case
+     Censor variable name (numeric), formatted 0=control, 1=case
 }
   \item{expo}{
      Exposure variable name.  Exposure can be either continuous (numeric) or categorical (factor)
-}
-  \item{dtint}{
-     Variable name for the start of followup. i.e. "dtint92","dtint97", etc.  This is required for the rate analysis.
 }
   \item{birthday}{
      Variable name for exact birth date.  Typically this is our "BDAYDATE" variable from the master file.
@@ -41,13 +41,13 @@ Vector of start ages for the analysis.  Default is 5-year age groups starting at
 }
 }
 \details{
-The cox_models() function automates the coxph() function found in the survival package and will run standard or time-dependent models depending on how the input data frame is constructed.  All models are stratified on single year of age at interview.  The function will run two sets of models with the following formulae:
+The cox_models() function automates the coxph() function found in the survival package and will run standard, time-dependent, or late-entry models depending on how the input data frame is constructed.  All models are stratified on single year of age at interview.  The function will run two sets of models with the following formulae:
 
 Age-adjusted models:
-     coxph(Surv(OUTCOME,FAILTIME)~EXPOSURE + strata(BASELINE_AGE))
+     coxph(Surv(START,STOP,OUTCOME)~EXPOSURE + strata(BASELINE_AGE))
 
 Multivariable-adjusted models:
-     coxph(Surv(OUTCOME,FAILTIME)~EXPOSURE + covariates + strata(BASELINE_AGE))
+     coxph(Surv(START,STOP,OUTCOME)~EXPOSURE + covariates + strata(BASELINE_AGE))
 
 The final output list will contain a data frame organizing all of the results that is suitable for delivery to your PI.  It will also contain all the model output for the age-adjusted and multivariable-adjusted models required for checking your work while doing the analysis and program review.
 
@@ -75,11 +75,14 @@ example.data <- data.frame(failnew=sample(1:7000,10000,replace=T),
                            allcauses=sample(0:1,10000,replace=T),
                            smoking=factor(sample(c("Never","Current","Former"),
                                                  10000,replace=T)),
-                           dtint92=rep(as.Date("1992-01-01"),10000),
+                           start=rep(as.Date("1992-01-01"),10000),
                            bdaydate=sample(c(-15000:5000),10000,replace=T))
 
+example.data$dateft <- example.data$start + failnew
+
 foo <- cox_models(dat=example.data,
-                  failtime="failnew",
+                  start="dtint92",
+                  stop="dateft",
                   outcome="allcauses",
                   expo="smoking",
                   dtint="dtint92",

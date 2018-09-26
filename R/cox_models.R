@@ -1,24 +1,34 @@
 
-
-cox_models <- function(dat,failtime,outcome,expo,dtint,birthday,covariates=NULL,agedist,agegrps=NULL){
+cox_models <- function(dat,start,stop,outcome,expo,birthday,covariates=NULL,agedist,agegrps=NULL){
 
 packages <- (.packages())
 if (!"survival" %in% packages) require(survival,quietly=T)
 if (!"dplyr" %in% packages) require(dplyr,quietly=T)
 
 
-     df <- dat
+# get the data
+df <- dat
 
-# Calculate age at baseline based on dtint and birthday
-     df$BASELINE_AGE <- floor((as.numeric(df[[dtint]])-as.numeric(df[[birthday]]))/365.25)
+# convert start and stop times to numeric
+df[,c(start,stop)] <- lapply(df[,c(start,stop)],as.numeric)
+
+# start time mus != stop time - adjusting if that is true (similar to adding 1 to fail time)
+df[[stop]] <- df[[stop]] + 1/365.25
+
+# Calculate age at baseline based on start date and birthday
+df$BASELINE_AGE <- floor((as.numeric(df[[start]])-as.numeric(df[[birthday]]))/365.25)
+
 # Calculate rates for categorical variables
 # For continuous variables, I'll output a blank dataset to merge later with estimates
 # Pull in the incrate function
 
+# Caclulate fail time (days) for rate analysis
+
+df$myfailtime <- as.numeric(df[[stop]]) - as.numeric(df[[start]]) + 1
 
 if (class(df[[expo]]) != "numeric"){
-     spec.rates <- incrate(dat=df, agedist, agegrps, dtint, birthday,
-                    failtime, outcome, expo)
+     spec.rates <- incrate(dat=df, agedist, agegrps, start, birthday,
+                    "myfailtime", outcome, expo)
      rates <- spec.rates$Std.Rates[spec.rates$Std.Rates$Exposure != "Total",c("Exposure", "Deaths","Person-years","Std rate")]
      names(rates) <- c("Exposure","Cases","Person-years","Std rate")
 } else {
@@ -30,9 +40,9 @@ if (class(df[[expo]]) != "numeric"){
 }
 
 # Modeling
-age.y <- formula(paste0("Surv(",failtime,",",outcome,")~",
+age.y <- formula(paste0("Surv(",start,",",stop,",",outcome,")~",
                         paste0(c(expo,"strata(BASELINE_AGE)"),collapse="+")))
-multi.y <- formula(paste0("Surv(",failtime,",",outcome,")~",
+multi.y <- formula(paste0("Surv(",start,",",stop,",",outcome,")~",
                         paste0(c(expo,"strata(BASELINE_AGE)",covariates),collapse="+")))
 age.fit <- survival::coxph(age.y,data=df)
 multi.fit <- survival::coxph(multi.y,data=df)

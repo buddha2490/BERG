@@ -5,7 +5,7 @@
 Function to run joint-cox proportional hazards models for subtype analyses
 }
 \description{
-Joint-cox models examine associations with risk factors across multiple disease subtypes.  See details:
+Joint-cox models examine associations with risk factors across multiple disease subtypes. Works with single exposure or time-dependent variables. See details:
 }
 \usage{
 jointCox(dat, primarySubtype, otherSubtypes, start, stop, expo, age, idvar, covariates = NULL)

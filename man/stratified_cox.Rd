@@ -74,24 +74,16 @@ Brian Carter
 
 
 \examples{
-example.data <- data.frame(failnew=sample(1:7000,10000,replace=T),
-                           allcauses=sample(0:1,10000,replace=T),
-                           smoking=factor(sample(c("Never","Current","Former"),
-                                                 10000,replace=T)),
-                           bmicat=factor(sample(c("18.5-24.9","25-29.9","30+"),
-                           10000,replace=T)),
-                           dtint=rep(as.Date("1992-01-01"),10000),
-                           age_int=round(sample(c(40:80),10000,replace=T)))
+df <- example_data
 
-example.data$dateft <- example.data$dtint + example.data$failnew
-
-foo <- stratified_cox(dat=example.data,
-                      start="dtint",
+foo <- stratified_cox(dat=df,
+                      start="dtint92",
                       stop="dateft",
-                      outcome="allcauses",
-                      expoVar="smoking",
-                      strataVar="bmicat",
-                      age="age_int",
+                      outcome="dead",
+                      expoVar="smoke92",
+                      strataVar="bmicat92",
+                      age="age92m",
                       covariates=NULL)
+
 
 }

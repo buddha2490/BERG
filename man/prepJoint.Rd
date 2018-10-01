@@ -10,15 +10,18 @@ Joint cox proportional hazards modeling in R requires that data be reformatted a
 
 }
 \usage{
-prepJoint(dat,subtypeVars)
+prepJoint(dat,primarySubtype,otherSubtypes)
 }
 
 \arguments{
   \item{dat}{
      Data frame used in the analysis.
 }
-  \item{subtypeVars}{
-  Character vector of subtype variable names.  These subtypes should be dummy coded, 0=noncase, 1=case.  For example, if you are modeling ER-status breast cancer, you would want a dummy variable for "ERPOS" and "ERNEG", each coded [0,1].  The user can include as many of these subtype variables as needed.
+  \item{primarySubtype}{
+  Character vector indicating your primary subtype.  This is the outcome for which you want risk estimates.  Variable should be coded as 0=noncase, 1=case.
+  }
+    \item{otherSubtypes}{
+  Character vector indicating the other subtypes.  These variables should also be coded as 0=noncase, 1=case.  There is no limit on how many subtypes can be included in the model.
   }
 }
 \details{
@@ -44,17 +47,8 @@ This function expands the size of your analytic dataset.  It is unlikely that th
 
 \examples{
 
-example.data <- data.frame(ID=as.character(1:1000),
-                           ERPOS=sample(c(0,0,0,1),10000,replace=T),
-                           ERNEG=sample(c(0,0,0,0,0,1),10000,replace=T),
-                           smoking=factor(sample(c("Never","Current","Former"),
-                                                 10000,replace=T)),
-                           start.time=0,
-                           dateft=runif(10000,1,50000),
-                           age92m=runif(10000,45,70))
-
-
-joint <- prepJoint(example.data,c("ERPOS","ERNEG"))
+df <- example_data
+joint <- prepJoint(df,primarySubtype="AML",otherSubtypes="CML")
 
 }
 

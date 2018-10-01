@@ -40,22 +40,19 @@ Maret Maliniak
 \code{\link{ageStdCrossTab}}
 }
 \examples{
-example.data <- data.frame(bmicat=sample(c("<18.5","18.5-24.9","25-29.9","30+"),
-                                   10000,replace=T),
-                      age_int=sample(40:90,10000,replace=T),
-                      smoking=sample(c("Never","Current","Former"),10000,replace=T))
+df <- example.data
 
-mytable <- ageStdFreqs(dat=example.data,
+mytable <- ageStdFreqs(dat=df,
                        agedist="YEARS00",
-                       age="age_int",
-                       var="bmicat")
+                       age="age92m",
+                       var="bmicat92")
 
 # Run multiple frequencies using lapply()
 
-manytables <- lapply(c("bmicat","smoking"),function(x){
-     ageStdFreqs(dat=example.data,
+manytables <- lapply(c("bmicat92","smoke92"),function(x){
+     ageStdFreqs(dat=df,
                  agedist="YEARS00",
-                 age="age_int",
+                 age="age92m",
                  var=x)
                  })
 # create a single table from the results

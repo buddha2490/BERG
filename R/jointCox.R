@@ -1,7 +1,8 @@
 
 
-prepJoint <- function(dat,subtypeVars){
+prepJoint <- function(dat,primarySubtype,otherSubtypes){
      df <- dat
+     subtypeVars <- c(primarySubtype,otherSubtypes)
      outputList <- list()
 for (i in 1:length(subtypeVars)){
      foo <- df
@@ -14,7 +15,7 @@ return(final)
      }
 
 
-jointCox <- function(dat,subtypeVars,start,stop,expo,age,idvar,covariates=NULL){
+jointCox <- function(dat,primarySubtype,otherSubtypes,start,stop,expo,age,idvar,covariates=NULL){
 
 # Check loaded packages
 packages <- (.packages())
@@ -25,11 +26,11 @@ if (!"dplyr" %in% packages) require(dplyr,quietly=T)
 # Prepare dataset
 # Typically this would be done outside the function
 # But I want this function to be self-contained, which means it is a little inefficient
-joint <- prepJoint(dat,subtypeVars)
+joint <- prepJoint(dat,primarySubtype,otherSubtypes)
 
 # Set primary outcome variable (first element of subtypeVars)
 
-myoutcome <- subtypeVars[1]
+myoutcome <- primarySubtype
 
      # Pull out my case numbers
      cases <- joint[joint[[myoutcome]]==1 & joint$EVENT2==1,]
@@ -109,6 +110,10 @@ myoutcome <- subtypeVars[1]
                            rbind(NA,results),stringsAsFactors=F)
      names(results) <- c("Exposure","Category","Cases","Estimate","Pval","P_Het")
      row.names(results) <- NULL
+
+     # Add an indicator for the subtype
+     results <- data.frame(Subtype=c(myoutcome,rep(NA,(nrow(results)-1))),
+                           results,stringsAsFactors=F)
 
      # Prepare all my results
      final <- list(final=results,

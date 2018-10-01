@@ -66,26 +66,19 @@ The final plots are limited on the x and y axis.  On the Y-axis (Hazard ratios) 
 \code{\link{rcs}}
 }
 \examples{
-example.data <- data.frame(failnew=sample(1:7000,10000,replace=T),
-                           allcauses=sample(0:1,10000,replace=T),
-                           BMI=runif(10000,18.5,50),
-                           smoking=factor(sample(c("Never","Current","Former"),
-                                                 10000,replace=T)),
-                           dtint=rep(as.Date("1992-01-01"),10000),
-                           age92m=sample(40:85,10000,replace=T))
-example.data$dateft <- example.data$dtint + failnew
 
-figure <- splineFun(dat=example.data,
-                    expo="BMI",
+df <- example_data
+figure <- splineFun(dat=df,
+                    expo="bmi92",
                     covariates=NULL,
                     reference=25,
                     knots=5,
-                    start="dtint",
+                    start="dtint92",
                     stop="dateft",
-                    outcome="allcauses",
+                    outcome="myeloid",
                     agestrat="age92m",
                     expo.label="Baseline BMI",
-                    outcome.text="Death from all causes")
+                    outcome.text="Incident myeloid leukemia")
 
 plot(figure)
 

@@ -34,17 +34,10 @@ Brian Carter
 }
 
 \examples{
-# Create a simple test dataset
-test1 <- data.frame(strata.variable=sample(0:1,100,replace=T),
-	   	       continuous1 = runif(100,0,100),
-		       continuous2 = runif(100,1,20),
-		       categorical1 = sample(0:5,100,replace=T),
-		       categorical2 = sample(1:3,100,replace=T)
-		      )
-
-table1 <- tbl1(dat=test1,
-          variable=c("continuous1","continuous2","categorical1","categorical2"),
-          stratvar="strata.variable")
+df <- example_data
+table1 <- tbl1(dat=df,
+          variable=c("bmi92","age92m","smoke92","educ"),
+          stratvar="myeloid")
 
 }
 

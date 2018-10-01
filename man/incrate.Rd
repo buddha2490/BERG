@@ -60,20 +60,17 @@ Brian Carter
 
 \examples{
 
-example.data <- data.frame(enrolldate=as.Date("1992-01-01"),
-                      bdaydate=sample(c(-15000:5000),10000,replace=T),
-                      failnew=sample(1:7000,10000,replace=T),
-                      lungcancer=sample(0:1,10000,replace=T),
-                      smoking=sample(c("Never","Current","Former"),10000,replace=T))
 
-rates <- incrate(dat=example.data,
+df <- example.data
+df$failtime <- as.numeric(df$dateft)-as.numeric(df$dtint92)
+rates <- incrate(dat=df,
                  agedist="YEARS00",
                  agegrps=c(40,65),
-                 dtint="enrolldate",
+                 dtint="dtint92",
                  birthday="bdaydate",
-                 failtime="failnew",
-                 outcome="lungcancer",
-                 expo="smoking")
+                 failtime="df$failtime",
+                 outcome="dead",
+                 expo="smoke92")
 
 print(rates$Std.Rate)
   }

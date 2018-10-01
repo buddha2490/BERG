@@ -71,21 +71,14 @@ Brian Carter
 }
 
 \examples{
-example.data <- data.frame(failnew=sample(1:7000,10000,replace=T),
-                           allcauses=sample(0:1,10000,replace=T),
-                           smoking=factor(sample(c("Never","Current","Former"),
-                                                 10000,replace=T)),
-                           start=rep(as.Date("1992-01-01"),10000),
-                           bdaydate=sample(c(-15000:5000),10000,replace=T))
 
-example.data$dateft <- example.data$start + failnew
+df <- example_data
 
-foo <- cox_models(dat=example.data,
+foo <- cox_models(dat=df,
                   start="dtint92",
                   stop="dateft",
-                  outcome="allcauses",
-                  expo="smoking",
-                  dtint="dtint92",
+                  outcome="dead",
+                  expo="smoke92",
                   birthday="bdaydate",
                   covariates=NULL,
                   agedist="YEARS00",

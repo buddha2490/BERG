@@ -45,17 +45,14 @@ Maret Maliniak
 \code{\link{nutweightlist}}
 }
 \examples{
-example.data <- data.frame(bmicat=sample(c("<18.5","18.5-24.9","25-29.9","30+"),
-                                   10000,replace=T),
-                      age_int=sample(40:90,10000,replace=T),
-                      smoking=sample(c("Never","Current","Former"),10000,replace=T))
 
-mytable <- ageStdCrossTab(dat=example.data,
+df <- example.data
+mytable <- ageStdCrossTab(dat=df,
                          mar=2,
                          agedist="YEARS00",
-                         age="age_int",
-                         var="bmicat",
-                         strata="smoking")
+                         age="age92m",
+                         var="bmicat92",
+                         strata="sex")
 
 
 }

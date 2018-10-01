@@ -5,9 +5,9 @@
 This is an example dataset useful for demonstrating the functions in the BERG package.
 }
 \description{
-The example_data data frame uses data from a recent analysis of BMI and myeloid leukemias.  The IDs and dates are fake, so please don't merge it with any existing data or believe and results that come out of it.  The data are only useful for learning the variaous BERG functions
+The example_data data frame uses data from a recent analysis of BMI and myeloid leukemias.  The IDs and dates are fake, so please don't merge it with any existing data or believe and results that come out of it.  The data are only useful for learning the various BERG functions
 }
-\usage{data("example_data")}
+\usage{df <- example_data}
 \format{
   A data frame with 152,046 observations on the following 15 variables.
   \describe{

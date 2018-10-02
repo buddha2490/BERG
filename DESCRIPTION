@@ -1,5 +1,7 @@
 Package: BERG
+
 Type: Package
+
 Title: Set of standardized functions for running analyses in the American Cancer Society's Behavioral and Epidemiological Research 
 Group
 Version: 1.0.1
@@ -19,8 +21,13 @@ LazyData: true
 
 Imports:
     metafor,
-    dplyr,
-    survival,
-    rms,
-    xlsx,
-    officer
+    
+	    dplyr,
+    
+	    survival,
+    
+	    rms,
+    
+	    xlsx,
+    
+	    officer

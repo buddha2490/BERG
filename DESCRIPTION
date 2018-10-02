@@ -1,33 +1,14 @@
 Package: BERG
-
 Type: Package
-
-Title: Set of standardized functions for running analyses in the American Cancer Society's Behavioral and Epidemiological Research 
-Group
-Version: 1.0.1
-
+Title: A set of standardized functions for ACS BERG analyses
+Version: 1.0.2
 Author: Brian Carter
-
 Maintainer: Brian Carter <brian.carter@cancer.org>
-
-Description: A handful of functions for automating modeling, frequency tables, metaanalyses, rate analyses, and
-    documentation.
-
-License: None
-
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: What license is it under?
 Encoding: UTF-8
-
 LazyData: true
-
 Imports:
-    metafor,
-    
-	    dplyr,
-    
-	    survival,
-    
-	    rms,
-    
-	    xlsx,
-    
-	    officer
+    metafor, dplyr, survival, rms, xlsx, officer
+ 

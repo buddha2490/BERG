@@ -24,7 +24,7 @@ prophazCheck(dat,start,stop,outcome,age,expo,outcome.title=NULL,expo.title=NULL)
   \item{outcome}{
      Character vector indicating the variable name for your censor variable.  Variable should be coded as a numeric variable, with 0=noncase, and 1=control
 }
-  \item{age}
+  \item{age}{
      Character vector indicating your baseline age variable.  Cox models used the strata() function to stratify on single year of baseline age.  Typically this would correspond to variables "AGE_INT", "AGE92M", etc.
 }
   \item{expo}{

@@ -16,3 +16,4 @@ Imports:
     rms,
     xlsx,
     officer
+, gridGraphics, grid, ggplot2

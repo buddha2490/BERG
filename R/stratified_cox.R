@@ -1,5 +1,3 @@
-
-
 # Stratified interaction models -------------------------------------------
 
 stratified_cox <- function(dat,start,stop,outcome,expoVar,strataVar,age,covariates=NULL){
@@ -32,18 +30,12 @@ if (class.expoVar == "character") stop("expoVar must be numeric or factor")
 # if expoVar is continuous, this is just a normal interaction model
 # if expoVar is categorical, then I need to code it with multiple referent groups in mind
 
-# continuous first
-if (class.expoVar != "factor"){
-     y <- formula(paste(
-     paste0("Surv(",start,",",stop,",",outcome,")~",
-            strataVar,"*",expoVar,"+",
-            paste(c(covariates,paste0("strata(",age,")")),collapse="+"))))
-     } else {
+# interaction model
      y <- formula(paste(
      paste0("Surv(",start,",",stop,",",outcome,")~",
             strataVar, "+", strataVar,":",expoVar,"+",
             paste(c(covariates,paste0("strata(",age,")")),collapse="+"))))
-     }
+
 
 # Reduced model is the same for continuous/categorical variables, just additive
 z <- formula(paste(

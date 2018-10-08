@@ -42,7 +42,7 @@ Maret Maliniak
 }
 
 \seealso{
-\code{\link{nutweightlist}}
+\code{\link{weightlist}}
 }
 \examples{
 

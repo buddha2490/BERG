@@ -36,7 +36,7 @@ Maret Maliniak
 }
 
 \seealso{
-\code{\link{nutweightlist}}
+\code{\link{weightlist}}
 \code{\link{ageStdCrossTab}}
 }
 \examples{

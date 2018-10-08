@@ -38,7 +38,7 @@ ageStdFreqs <- function(dat,agedist,age,var){
 standardize <- function(x){
   agefreq <- table(agecat[expo==x])  # raw age-specific frequencies for expo level
   agefreq <- agefreq*weights$weights # multiply frequencies by age-specific weights
-  Freq.Adj <- sum(agefreq)  #  sum to get an adjusted frequency for expo level
+  Freq.Adj <- sum(agefreq,na.rm=T)  #  sum to get an adjusted frequency for expo level
   tot <- cbind(x,Freq.Adj)  # combine with the exposure level name
   return(tot)
 }

@@ -1,6 +1,11 @@
+
 ageStdCrossTab <- function(dat,mar=2,agedist,age,var,strata){
 
   df <- dat
+
+  if (class(df[[strata]]) != "factor") stop("strata is not a factor variable")
+
+
 
   # get weights
 
@@ -22,15 +27,15 @@ ageStdCrossTab <- function(dat,mar=2,agedist,age,var,strata){
 
   # pull exposure/strata variable and factor levels
   expo <- df[[var]]
-  strat <- df[[strata]]
+  strat <- df[[strata]]; strat <- factor(strat)
   cat.expo <- levels(expo)
   cat.strata <- levels(strat)
 
-  x <- cat.strata[1]
+  #x <- cat.strata[1]
   columns <- function(x){
     one <- prop.table(table(agecat[strat==x],expo[strat==x]),1)
     one <- one*weights$weights
-    tot.col <- apply(one,2,sum)
+    tot.col <- apply(one,2,function(x) sum(x,na.rm=T))
     std.prop <- format(round(tot.col,4)*100,2)
     return(std.prop)
   }
@@ -38,7 +43,7 @@ ageStdCrossTab <- function(dat,mar=2,agedist,age,var,strata){
   rows    <- function(y){
     one <- prop.table(table(agecat[expo==y], strat[expo==y]),1)
     one <- one*weights$weights
-    tot.col <- apply(one,2,sum)
+    tot.col <- apply(one,2,function(x) sum(x,na.rm=T))
     std.prop <- format(round(tot.col,4)*100,2)
   }
 

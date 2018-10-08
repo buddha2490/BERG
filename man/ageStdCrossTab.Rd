@@ -28,7 +28,7 @@ Character vector for your age at baseline variable.  This could be "AGE_INT" or 
 Character vector for the primary frequency variable (typically formatted as the row variables)
 }
   \item{strata}{
-Character vector for the strata variable for which you need frequencies (typically formatted as your column variable)
+Character/factor vector for the strata variable for which you need frequencies (typically formatted as your column variable)
 }
 }
 

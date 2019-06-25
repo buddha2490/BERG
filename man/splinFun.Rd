@@ -29,8 +29,11 @@ The spline plot is centered on a reference value.  If left NULL, this reference 
  \item{knots}{
 Number of knots (must be >=3) calculated using default quantiles of expo.  For 3-5 knots, the outer quantiles used are 0.05 and 0.95.  For knots > 5, the outer quantiles are 0.025 and 0.975.  The remaining knots are equally spaced between these outer quantiles.
  }
-  \item{failtime}{
-Character vector of your failtime variable, must be coded as numeric.
+  \item{start}{
+Character vector for your start of followup, must be coded as numeric.
+}
+  \item{stop}{
+Character vector for your end of followup, must be coded as numeric.
 }
   \item{outcome}{
 Outcome variable.  Must be numeric and coded as 0=control, 1=case
